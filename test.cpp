@@ -7,6 +7,7 @@
 #include <string_view>
 #include <cstdio>
 #include <array>
+#include <stdlib.h>
 
 namespace fs = std::filesystem;
 
@@ -54,13 +55,15 @@ void generate_directory(fs::path path, size_t depth,
     }
 }
 
-void random_tests(size_t test_num, int seed = 0) {
+void random_tests(const std::string& path, size_t depth,
+    size_t test_num, int seed = 0) {
+
     std::mt19937 gen(seed);
     for (size_t i = 0; i < test_num; ++i) {
         auto dir_name = generate_path(fs::path(""), gen);
-        generate_directory(dir_name, 1, gen, 20, 20);
+        generate_directory(dir_name, depth, gen, 20, 20);
         std::string correct_output = exec("tree -a -C " + dir_name.string());
-        std::string test_output = exec("./tree " + dir_name.string());
+        std::string test_output = exec(path + " " + dir_name.string());
         fs::remove_all(dir_name);
         if (correct_output != test_output) {
             std::cout << "\033[01;31mBAD:\033[00m Failed on test #";
@@ -74,7 +77,7 @@ void random_tests(size_t test_num, int seed = 0) {
         << " tests!" << std::endl;
 }
 
-int main() {
-    random_tests(100);
+int main(int argc, char* argv[]) {
+    random_tests(argv[1], atoi(argv[2]), atoi(argv[3]));
     return 0;
 }

@@ -19,5 +19,8 @@ sample_dir
     └── file3
 
 1 directory, 4 files
+foo@bar:~$ ./autotest ./tree 3 10
+OK: Passed 10 tests!
 ```
-The program takes arbitrary number of arguments and has no additional options. Given no arguments, `tree` recursively lists all files and subdirectories in the current directory. If arguments are provided, `tree` lists content of the given directories in sequence. After listing, `tree` prints the total number of found files and directories.
+The program takes arbitrary number of arguments and has no additional options. Given no arguments, `tree` recursively lists all files and subdirectories in the current directory. If arguments are provided, `tree` lists content of the given directories in sequence. After listing, `tree` prints the total number of found files and directories.\
+Autotest takes three arguments - path to the executable of `tree`, the depth of tests and the number of tests.
