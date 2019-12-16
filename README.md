@@ -4,7 +4,7 @@ Analogue of `tree -a` linux command.
 
 ### Compilation
 ```bash
-gcc tree.c -o tree # program
+gcc tree.c tree_impl.c tree_output.c -o tree # program
 g++ test.cpp -o autotest -std=c++17 -lstdc++fs # autotest
 ```
 
